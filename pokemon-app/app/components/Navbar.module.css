@@ -1,0 +1,107 @@
+.navbar {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  height: 62px;
+  background: rgba(7, 5, 15, 0.92);
+  backdrop-filter: blur(22px);
+  border-bottom: 1px solid rgba(255, 214, 0, 0.12);
+  box-shadow: 0 2px 40px rgba(0,0,0,0.6);
+}
+
+/* Logo */
+.logo { display: flex; align-items: center; gap: 0.45rem; flex-shrink: 0; }
+
+.bolt {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 8px #ffd600) drop-shadow(0 0 18px #ffaa00);
+  animation: boltFlicker 3s ease-in-out infinite;
+}
+
+@keyframes boltFlicker {
+  0%,100% { filter: drop-shadow(0 0 8px #ffd600) drop-shadow(0 0 18px #ffaa00); }
+  45%     { filter: drop-shadow(0 0 4px #ffd600) drop-shadow(0 0 8px #ffaa00); opacity: 0.85; }
+  50%     { filter: drop-shadow(0 0 20px #fff)   drop-shadow(0 0 32px #ffd600); opacity: 1; }
+  55%     { filter: drop-shadow(0 0 4px #ffd600) drop-shadow(0 0 8px #ffaa00); opacity: 0.85; }
+}
+
+.brand {
+  font-family: 'Bangers', cursive;
+  font-size: 1.7rem;
+  letter-spacing: 0.06em;
+  color: #fff;
+  text-shadow: 0 0 16px rgba(255,214,0,0.35);
+  line-height: 1;
+}
+
+.arena { color: #ffd600; }
+
+.tcgBadge {
+  display: inline-block;
+  background: #ffd600;
+  color: #07050f;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+  transform: translateY(-3px);
+}
+
+/* Nav Tabs */
+.navTabs {
+  display: flex;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.068);
+  border: 1px solid rgba(255, 255, 255, 0.192);
+  border-radius: 10px;
+  padding: 0.3rem;
+}
+
+.navTab {
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  padding: 0.45rem 1rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.navTab:hover { color: #ffd600; background: rgba(255,214,0,0.06); }
+
+.navTabActive {
+  background: rgba(255,214,0,0.14) !important;
+  color: #ffd600 !important;
+  box-shadow: inset 0 0 0 1px rgba(255,214,0,0.3);
+}
+
+/* View Toggle */
+.viewToggle {
+  display: flex; gap: 0.2rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px; padding: 0.25rem;
+  flex-shrink: 0;
+}
+
+.viewBtn {
+  background: transparent; border: none;
+  color: rgba(255,255,255,0.35);
+  font-size: 1.1rem; padding: 0.3rem 0.6rem;
+  border-radius: 5px; transition: all 0.2s;
+}
+.viewBtn:hover { color: #ffd600; }
+.viewBtn.active { background: rgba(255,214,0,0.14); color: #ffd600; }
+
+@media (max-width: 700px) {
+  .navbar { padding: 0 1rem; }
+  .navTab { padding: 0.4rem 0.6rem; font-size: 0.65rem; }
+  .brand  { font-size: 1.3rem; }
+}

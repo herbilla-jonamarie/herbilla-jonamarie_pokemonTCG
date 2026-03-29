@@ -1,0 +1,62 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:  #ffd600;
+  --gold2: #ffaa00;
+  --blue:  #4fc3f7;
+  --pink:  #ff6b9d;
+  --bg:    #000000;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  /* Subtle blue + yellow hex/dot pattern on pure black */
+  background-image:
+    /* Yellow dots — sparse */
+    radial-gradient(circle, rgba(255,214,0,0.07) 1px, transparent 1px),
+    /* Blue dots — offset grid */
+    radial-gradient(circle, rgba(79,195,247,0.055) 1px, transparent 1px),
+    /* Faint diagonal lines — yellow */
+    repeating-linear-gradient(
+      60deg,
+      transparent,
+      transparent 38px,
+      rgba(255,214,0,0.025) 38px,
+      rgba(255,214,0,0.025) 39px
+    ),
+    /* Faint diagonal lines — blue */
+    repeating-linear-gradient(
+      -60deg,
+      transparent,
+      transparent 38px,
+      rgba(79,195,247,0.022) 38px,
+      rgba(79,195,247,0.022) 39px
+    );
+
+  background-size:
+    48px 48px,
+    48px 48px,
+    80px 80px,
+    80px 80px;
+
+  background-position:
+    0 0,
+    24px 24px,
+    0 0,
+    0 0;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: rgba(255,214,0,0.28); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,214,0,0.5); }
+
+button { cursor: pointer; font-family: inherit; }
+img    { display: block; max-width: 100%; }

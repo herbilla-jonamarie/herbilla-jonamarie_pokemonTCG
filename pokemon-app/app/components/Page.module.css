@@ -1,0 +1,96 @@
+.page { min-height: 100vh; position: relative; overflow-x: hidden; }
+
+/* ── Background ── */
+.bgEffects { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+
+.orb1 { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(255,214,0,0.06) 0%, transparent 65%); top: -250px; left: -150px; animation: drift1 20s ease-in-out infinite; }
+.orb2 { position: absolute; width: 550px; height: 550px; border-radius: 50%; background: radial-gradient(circle, rgba(79,195,247,0.055) 0%, transparent 65%); bottom: 5%; right: -120px; animation: drift2 24s ease-in-out infinite; }
+.orb3 { position: absolute; width: 450px; height: 450px; border-radius: 50%; background: radial-gradient(circle, rgba(255,107,157,0.045) 0%, transparent 65%); top: 42%; left: 38%; animation: drift3 28s ease-in-out infinite; }
+
+@keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(70px,90px) scale(1.1)} 66%{transform:translate(-50px,40px) scale(0.95)} }
+@keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-90px,-70px) scale(1.08)} 66%{transform:translate(55px,-30px) scale(1.12)} }
+@keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-60px,65px) scale(1.18)} }
+
+.gridOverlay { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 44px 44px; }
+
+/* Lightning streaks */
+.bolt1 {
+  position: absolute; top: 0; left: 20%; width: 2px; height: 200px;
+  background: linear-gradient(to bottom, transparent, rgba(255,214,0,0.25), transparent);
+  animation: boltFlash1 6s ease-in-out infinite;
+}
+.bolt2 {
+  position: absolute; top: 0; right: 30%; width: 1px; height: 140px;
+  background: linear-gradient(to bottom, transparent, rgba(255,214,0,0.18), transparent);
+  animation: boltFlash2 9s ease-in-out infinite;
+}
+
+@keyframes boltFlash1 {
+  0%,100%{opacity:0;transform:scaleY(0) translateY(-50px)}
+  10%{opacity:0} 12%{opacity:1;transform:scaleY(1) translateY(0)} 14%{opacity:0}
+  16%{opacity:0.6;transform:scaleY(1.1) translateY(0)} 18%{opacity:0}
+}
+@keyframes boltFlash2 {
+  0%,100%{opacity:0;transform:scaleY(0) translateY(-30px)}
+  40%{opacity:0} 42%{opacity:1;transform:scaleY(1) translateY(0)} 44%{opacity:0}
+}
+
+/* ── Main ── */
+.main { position: relative; z-index: 1; }
+
+/* ── Hero ── */
+.hero {
+  max-width: 1400px; margin: 0 auto;
+  padding: 3rem 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 0.7rem;
+  text-align: center; align-items: center;
+}
+
+.heroEyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.2em; color: rgba(255,214,0,0.55);
+}
+
+.heroTitle {
+  display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
+  line-height: 0.95;
+}
+
+.titleLine1 {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  letter-spacing: 0.08em;
+  color: #fff;
+  text-shadow:
+    0 0 20px rgba(255,214,0,0.6),
+    0 0 60px rgba(255,214,0,0.25),
+    2px 2px 0 rgba(0,0,0,0.8),
+    -1px -1px 0 rgba(255,214,0,0.2);
+  position: relative;
+  animation: titlePulse 4s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+  0%,100% { text-shadow: 0 0 20px rgba(255,214,0,0.6), 0 0 60px rgba(255,214,0,0.25), 2px 2px 0 rgba(0,0,0,0.8); }
+  50%     { text-shadow: 0 0 35px rgba(255,214,0,0.9), 0 0 90px rgba(255,214,0,0.4), 0 0 130px rgba(255,170,0,0.2), 2px 2px 0 rgba(0,0,0,0.8); }
+}
+
+.titleLine2 {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(2rem, 5vw, 4rem);
+  letter-spacing: 0.1em;
+}
+
+.titleGold {
+  color: #ffd600;
+  text-shadow: 0 0 18px rgba(255,214,0,0.8), 0 0 40px rgba(255,170,0,0.4);
+}
+
+.titleWhite { color: rgba(255,255,255,0.75); }
+
+.heroSub {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.82rem; color: rgba(255,255,255,0.38);
+  max-width: 520px; line-height: 1.75; text-align: center;
+}

@@ -1,0 +1,282 @@
+/* ══════ Container ══════ */
+.container {
+  max-width: 1400px; margin: 0 auto;
+  padding: 1.2rem 2rem 5rem;
+  width: 100%; box-sizing: border-box;
+}
+
+/* ══════ Filter Row (compact dropdowns) ══════ */
+.filterRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Dropdown wrapper ── */
+.dropWrap { position: relative; }
+
+.dropTrigger {
+  display: flex; align-items: center; gap: 0.45rem;
+  background: rgba(0,0,0,0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.247);
+  border-radius: 10px;
+  padding: 0.52rem 0.85rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem; color: rgb(196, 188, 188);
+  cursor: pointer; transition: all 0.2s;
+  white-space: nowrap;
+}
+.dropTrigger:hover {
+  border-color: rgba(255,214,0,0.35);
+  color: rgba(255,214,0,0.85);
+  background: rgba(0,0,0,0.6);
+}
+.dropTriggerActive {
+  background: rgba(0,0,0,0.55) !important;
+}
+
+.dropLabel {
+  font-size: 0.6rem; color: rgba(147, 145, 145, 0.954);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.dropValue { color: inherit; }
+
+.caret { font-size: 0.7rem; opacity: 0.55; transition: transform 0.2s; }
+.caretOpen { transform: rotate(180deg); }
+
+/* Dropdown panel */
+.dropPanel {
+  position: absolute; top: calc(100% + 5px); left: 0;
+  min-width: 170px;
+  background: #060412;
+  border: 1px solid rgba(255,214,0,0.16);
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 500;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.04);
+  animation: dropIn 0.16s ease;
+  max-height: 280px;
+  overflow-y: auto;
+}
+@keyframes dropIn {
+  from { opacity:0; transform: translateY(-5px) scale(0.97); }
+  to   { opacity:1; transform: translateY(0)    scale(1);    }
+}
+.dropPanel::-webkit-scrollbar { width: 3px; }
+.dropPanel::-webkit-scrollbar-thumb { background: rgba(255,214,0,0.18); border-radius: 2px; }
+
+.dropItem {
+  display: flex; align-items: center; gap: 0.5rem;
+  width: 100%; padding: 0.58rem 0.9rem;
+  background: transparent; border: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem; color: rgb(255, 255, 255);
+  cursor: pointer; transition: background 0.14s; text-align: left;
+}
+.dropItem:hover { background: rgba(255,255,255,0.04); color: #fff; }
+.dropItemActive { color: #ffd600 !important; background: rgba(255,214,0,0.07) !important; }
+
+.dropCheck { margin-left: auto; font-size: 0.72rem; color: #ffd600; }
+
+/* Filter right side */
+.filterRight { display: flex; align-items: center; gap: 0.7rem; margin-left: auto; }
+
+.resultMeta { font-size: 0.68rem; color: rgba(255,255,255,0.22); white-space: nowrap; }
+.filteredCount { color: #ffd600; }
+
+.clearAll {
+  background: rgba(255,107,107,0.07); border: 1px solid rgba(255,107,107,0.22);
+  border-radius: 8px; padding: 0.3rem 0.65rem;
+  font-family: 'Space Mono', monospace; font-size: 0.62rem; color: #ff6b6b;
+  cursor: pointer; transition: all 0.18s; white-space: nowrap;
+}
+.clearAll:hover { background: rgba(255,107,107,0.16); }
+
+/* ══════ Card Appear ══════ */
+.cardAnim { animation: riseIn 0.42s ease both; }
+@keyframes riseIn {
+  from { opacity:0; transform: translateY(16px) scale(0.96); }
+  to   { opacity:1; transform: translateY(0)    scale(1);    }
+}
+
+/* ══════ 3-D Flip ══════ */
+.flipScene {
+  width: 100%; aspect-ratio: 2.5 / 3.5;
+  perspective: 900px; cursor: pointer; position: relative;
+}
+.flipScene > * {
+  position: absolute; inset: 0; border-radius: 14px;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  transition: transform 0.62s cubic-bezier(0.4,0.2,0.2,1), box-shadow 0.28s ease;
+  transform-style: preserve-3d;
+}
+
+/* Front */
+.face {
+  background: rgba(19, 18, 21, 0.751);
+  border: 1px solid rgba(201, 237, 81, 0.605);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 0.6rem; overflow: hidden;
+  transform: rotateY(0deg);
+}
+.flipScene.flipped .face { transform: rotateY(-180deg); }
+
+/* Back */
+.faceBack {
+  background: var(--bg, rgba(19, 13, 50, 0.96));
+  border: 1px solid color-mix(in srgb, var(--c) 22%, rgba(255,255,255,0.06));
+  display: flex; flex-direction: column; gap: 0.45rem;
+  padding: 0.85rem; overflow: hidden;
+  transform: rotateY(180deg);
+}
+.flipScene.flipped .faceBack { transform: rotateY(0deg); }
+
+.flipScene:not(.flipped):hover .face {
+  transform: rotateY(-10deg) translateY(-5px);
+  box-shadow: 12px 14px 40px rgba(0,0,0,0.7),
+    -2px -2px 0 1px color-mix(in srgb, var(--c) 35%, transparent);
+}
+
+.frontGlow {
+  position: absolute; inset: 0; background: var(--g);
+  opacity: 0; mix-blend-mode: overlay; border-radius: 14px;
+  pointer-events: none; transition: opacity 0.28s;
+}
+.flipScene:not(.flipped):hover .frontGlow { opacity: 0.48; }
+
+.cardImg {
+  width: 94%; height: 90%; object-fit: contain; border-radius: 6px;
+  filter: drop-shadow(0 6px 14px rgba(154, 153, 153, 0.607));
+  transition: transform 0.28s; position: relative; z-index: 1;
+}
+.flipScene:not(.flipped):hover .cardImg { transform: scale(1.03); }
+
+.typePip {
+  position: absolute; bottom: 0.45rem; left: 0.45rem; z-index: 2;
+  font-family: 'Space Mono', monospace; font-size: 0.55rem;
+  font-weight: 700; letter-spacing: 0.07em;
+  color: #000; padding: 0.18rem 0.55rem; border-radius: 10px; opacity: 0.88;
+}
+.tapHint {
+  position: absolute; bottom: 0.45rem; right: 0.45rem; z-index: 2;
+  font-family: 'Space Mono', monospace; font-size: 0.5rem; color: rgba(255,255,255,0.2);
+}
+
+.favBtn {
+  position: absolute; top: 0.45rem; right: 0.45rem; z-index: 5;
+  background: rgba(0,0,0,0.52); backdrop-filter: blur(5px);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
+  width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+  font-size: 0.74rem; color: rgba(255,255,255,0.38); transition: all 0.2s; padding: 0;
+}
+.favBtn:hover  { color:#ff6b9d; border-color:rgba(255,107,157,0.4); transform:scale(1.15); }
+.favActive     { color:#ff6b9d !important; background:rgba(255,107,157,0.14) !important; border-color:rgba(255,107,157,0.5) !important; }
+
+/* Back side */
+.backGlow {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--c) 16%, transparent), transparent 65%);
+  pointer-events: none;
+}
+.backHeader { display: flex; gap: 0.5rem; align-items: flex-start; z-index: 1; }
+.backThumb  { width: 46px; height: auto; border-radius: 5px; flex-shrink: 0; filter: drop-shadow(0 3px 8px rgba(0,0,0,0.6)); }
+.backMeta   { display: flex; flex-direction: column; gap: 0.12rem; overflow: hidden; }
+.backName   { font-family: 'Bangers', cursive; font-size: 1rem; letter-spacing: 0.04em; margin: 0; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.backSub    { font-size: 0.58rem; color: rgba(255,255,255,0.38); margin: 0; }
+.backRarity { font-size: 0.56rem; color: #ffd600; margin: 0; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.hpRow   { display:flex; align-items:center; gap:0.4rem; z-index:1; }
+.hpLabel { font-size:0.55rem; color:rgba(255,255,255,0.28); text-transform:uppercase; letter-spacing:0.08em; width:18px; }
+.hpTrack { flex:1; height:4px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden; }
+.hpFill  { height:100%; border-radius:2px; box-shadow:0 0 5px currentColor; }
+.hpNum   { font-family:'Bangers',cursive; font-size:0.78rem; color:rgba(255,255,255,0.6); width:28px; text-align:right; letter-spacing:0.04em; }
+
+.atkRow  { display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:6px; padding:0.26rem 0.5rem; z-index:1; }
+.atkName { font-family:'Bangers',cursive; font-size:0.72rem; letter-spacing:0.03em; color:rgba(255,255,255,0.82); }
+.atkDmg  { font-family:'Bangers',cursive; font-size:0.85rem; letter-spacing:0.04em; }
+
+.weakRow   { display:flex; align-items:center; gap:0.35rem; z-index:1; }
+.weakLabel { font-size:0.55rem; color:rgba(255,255,255,0.28); text-transform:uppercase; letter-spacing:0.07em; }
+.weakBadge { background:rgba(255,107,107,0.1); border:1px solid rgba(255,107,107,0.28); border-radius:7px; padding:0.12rem 0.45rem; font-size:0.56rem; color:#ff6b6b; }
+
+.setLine { display:flex; justify-content:space-between; font-size:0.56rem; color:rgba(255,255,255,0.22); z-index:1; margin-top:auto; }
+
+.backActions { display:flex; gap:0.4rem; z-index:5; }
+.collBtn {
+  flex:1; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1);
+  border-radius:7px; padding:0.42rem 0;
+  font-family:'Space Mono',monospace; font-size:0.58rem; color:rgba(255,255,255,0.45);
+  cursor:pointer; transition:all 0.2s; text-align:center;
+}
+.collBtn:hover  { border-color:rgba(255,214,0,0.3); color:#ffd600; }
+.collActive     { background:rgba(255,214,0,0.1) !important; border-color:rgba(255,214,0,0.45) !important; color:#ffd600 !important; }
+
+.detailBtn {
+  flex:1; background:color-mix(in srgb, var(--c) 14%, transparent);
+  border:1px solid color-mix(in srgb, var(--c) 40%, transparent);
+  border-radius:7px; padding:0.42rem 0;
+  font-family:'Space Mono',monospace; font-size:0.58rem; color:var(--c);
+  cursor:pointer; transition:all 0.18s; text-align:center; letter-spacing:0.03em;
+}
+.detailBtn:hover { background:color-mix(in srgb, var(--c) 24%, transparent); transform:translateY(-1px); }
+
+/* ══════ 5-col Grid ══════ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.1rem;
+}
+@media (max-width:1200px) { .grid { grid-template-columns: repeat(4,1fr); } }
+@media (max-width:900px)  { .grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width:600px)  { .grid { grid-template-columns: repeat(2,1fr); } }
+
+.listMode { grid-template-columns:1fr !important; gap:0.55rem; }
+.listMode .flipScene { aspect-ratio:unset; height:88px; }
+.listMode .face,.listMode .faceBack { flex-direction:row; align-items:center; padding:0.5rem 1rem; gap:0.7rem; }
+.listMode .cardImg { width:50px; height:auto; }
+
+/* ══════ Shelf ══════ */
+.shelfHeader { display:flex; align-items:baseline; gap:1rem; margin-bottom:1.5rem; }
+.shelfTitle  { font-family:'Bangers',cursive; font-size:2rem; letter-spacing:0.06em; color:#ffd600; text-shadow:0 0 20px rgba(255,214,0,0.4); }
+.shelfCount  { font-family:'Space Mono',monospace; font-size:0.72rem; color:rgba(255,255,255,0.3); }
+.shelfGrid   { display:grid; grid-template-columns:repeat(5,1fr); gap:1.1rem; }
+@media (max-width:1200px) { .shelfGrid { grid-template-columns:repeat(4,1fr); } }
+@media (max-width:900px)  { .shelfGrid { grid-template-columns:repeat(3,1fr); } }
+@media (max-width:600px)  { .shelfGrid { grid-template-columns:repeat(2,1fr); } }
+
+.shelfEmpty     { text-align:center; padding:5rem 2rem; font-family:'Space Mono',monospace; color:rgba(255,255,255,0.22); font-size:0.8rem; line-height:2; }
+.shelfEmptyIcon { font-size:3rem; margin-bottom:1rem; color:rgba(255,214,0,0.2); }
+
+/* ══════ Skeleton ══════ */
+.skeleton {
+  border-radius:14px; aspect-ratio:2.5/3.5;
+  background:linear-gradient(90deg,rgba(255,255,255,0.03) 25%,rgba(255,255,255,0.07) 50%,rgba(255,255,255,0.03) 75%);
+  background-size:200% 100%; animation:shimmer 1.5s infinite;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+.error,.empty { text-align:center; font-family:'Space Mono',monospace; font-size:0.8rem; padding:4rem; color:rgba(255,255,255,0.28); }
+.error { color:#ff6b6b; }
+
+/* ══════ Pagination ══════ */
+.pagination { display:flex; align-items:center; justify-content:center; gap:0.9rem; margin-top:3rem; }
+.pageBtn {
+  background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px; padding:0.5rem 1.1rem;
+  color:rgba(255,255,255,0.5); cursor:pointer;
+  font-family:'Space Mono',monospace; font-size:0.76rem; transition:all 0.2s;
+}
+.pageBtn:hover:not(:disabled) { background:rgba(255,214,0,0.1); border-color:rgba(255,214,0,0.4); color:#ffd600; }
+.pageBtn:disabled { opacity:0.25; cursor:not-allowed; }
+.pageNumbers { display:flex; gap:0.3rem; }
+.pageNum {
+  background:transparent; border:1px solid rgba(255,255,255,0.09);
+  border-radius:6px; width:33px; height:33px;
+  color:rgba(255,255,255,0.35); cursor:pointer;
+  font-family:'Space Mono',monospace; font-size:0.76rem; transition:all 0.18s;
+}
+.pageNum:hover { border-color:rgba(255,214,0,0.4); color:#ffd600; }
+.activePage   { background:rgba(255,214,0,0.15); border-color:#ffd600; color:#ffd600 !important; }
